@@ -13,8 +13,8 @@ library(ggplot2)
 library(psych)
 library(stats)
 
-isol <- read_excel("C:/Users/emmac/Desktop/alt_isol.xlsx", skip = 1)
-pilot <- read_excel("C:/Users/emmac/Desktop/alt_pilot.xlsx", skip = 1)
+isol <- read_excel("...;", skip = 1)
+pilot <- read_excel("..., skip = 1)
 
 #2. Création des scores composites pour chaque répondant car pas sur 100
 # Pour les isolés
