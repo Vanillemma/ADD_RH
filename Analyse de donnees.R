@@ -1,6 +1,3 @@
-####################
-## Memoire RH     ##
-####################
 
 #1. Librairies et chemins
 install.packages("readxl")
@@ -8,6 +5,7 @@ install.packages("dplyr")
 install.packages("ggplot2")
 install.packages("psych")      
 install.packages("stats")      
+install.packages("corrplot")
 
 library(readxl)
 library(dplyr)
@@ -15,12 +13,10 @@ library(ggplot2)
 library(psych)
 library(stats)
 
-# rm(list = ls())
-
 isol <- read_excel("C:/Users/emmac/Desktop/alt_isol.xlsx", skip = 1)
 pilot <- read_excel("C:/Users/emmac/Desktop/alt_pilot.xlsx", skip = 1)
 
-#2. Créeation des scores composites pour chaque répondant car pas sur 100
+#2. Création des scores composites pour chaque répondant car pas sur 100
 # Pour les isolés
 isol <- isol %>%
   mutate(
@@ -46,9 +42,7 @@ cor.test(isol$attractivite, isol$engagement_total, method = "pearson")
 #H0 (hypothèse nulle) : il n’y a pas de corrélation entre attractivité perçue et engagement → ρ = 0
 #H1 (hypothèse alternative) : il existe une corrélation significative entre attractivité perçue et engagement → ρ ≠ 0
 
-
 cor.test(pilot$attractivite, pilot$engagement_total, method = "pearson")
-
 
 #4. H2 : Corrélation entre attractivité et engagement
 isol$groupe <- "isolé"
@@ -97,7 +91,6 @@ ggplot(summary_data, aes(x = groupe, y = mean_eng, fill = groupe)) +
        y = "Engagement (moyenne ± SE)") +
   theme_minimal()
 
-
 #5. Comparaison des moyennes d’engagement entre groupes avec des correlations mais je dois renommer les catégories
 isol <-isol %>%
   mutate(
@@ -134,8 +127,7 @@ cor.test(merged_data$valeur_economique, merged_data$engagement_total) #0.7414111
 cor.test(merged_data$valeur_developpement, merged_data$engagement_total) #0.4293748 
 cor.test(merged_data$valeur_application, merged_data$engagement_total) #0.5145187
 
-
-#Représentation visuelle de valeur économique et engagement total car correlation positive
+#Représentation de valeur économique et engagement total car correlation positive
 ggplot(merged_data, aes(x = valeur_economique, y = engagement_total)) +
   geom_point(color = "steelblue", size = 3) +
   geom_smooth(method = "lm", se = TRUE, color = "darkred") +
@@ -170,7 +162,7 @@ tidy(modele) %>%
        y = "Coefficient de régression (β)") +
   theme_minimal()
 
-# 6. Corrélations croisées (matrice)
+# 6. Corrélations croisées (via une matrice)
 # Sélection des variables
 cor_mat <- merged_data %>%
   select(valeur_attrait, valeur_sociale, valeur_economique,
@@ -182,8 +174,6 @@ correlation_results <- corr.test(cor_mat, method = "pearson")
 print(correlation_results$r)    # Matrice des corrélations
 print(correlation_results$p)    # Matrice des p-values
 
-
-install.packages("corrplot")
 library(corrplot)
 
 # Créer la matrice de corrélation (sur les bonnes colonnes)
@@ -252,7 +242,7 @@ ggplot(df_calcule, aes(x = reorder(valeur, correlation), y = correlation, fill =
 
 library(ggplot2)
 
-# Graphe d'interaction : attractivité × groupe → engagement
+# Graphe d'interaction attractivité × groupe → engagement
 ggplot(merged_data, aes(x = attractivite, y = engagement_total, color = groupe)) +
   geom_point(size = 2) +
   geom_smooth(method = "lm", se = TRUE, fullrange = TRUE) +
