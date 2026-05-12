@@ -2,7 +2,7 @@
 
 ## Français
 
-Ce dépôt contient des scripts R réalisés pour aider à analyser des données RH fournies dans le cadre d’un projet d’étude.  
+Ce dépôt contient un script R réalisé pour aider à analyser des données RH fournies dans le cadre d’un projet d’étude.  
 L’objectif principal était de produire des statistiques descriptives, nettoyer les données et faciliter l’interprétation des résultats.
 
 ## Contenu du dépôt
@@ -30,7 +30,7 @@ Les scripts sont partagés uniquement pour montrer la démarche d’analyse réa
 
 ## English
 
-This repository contains R scripts created to help analyze HR data provided as part of a study project.  
+This repository contains an R script created to help analyze HR data provided as part of a study project.  
 The main goal was to produce descriptive statistics, clean the data, and support the interpretation of the results.
 
 ## Repository content
